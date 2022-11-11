@@ -1,3 +1,13 @@
+// Variable
+let currentQuestion = 0;
+let right_answer_counter = 0;
+let false_answer_counter = 0;
+let audio_success = new Audio('audio/success.mp3');
+let audio_fail = new Audio('audio/fail.mp3');
+let audio_end = new Audio('audio/bravo.mp3')
+
+
+// Array
 let questions = [
     {
         "question": "Which country has the largest population in the world?",
@@ -56,7 +66,7 @@ let questions = [
         "right_answer": 2
     },
     {
-        "question": "The most common surname in Germany is : ?",
+        "question": "Which is the most common Surname in Germany?",
         "answer_1": "Meyer",
         "answer_2": "Schmidth",
         "answer_3": "Müller",
@@ -82,11 +92,156 @@ let questions = [
 ];
 
 
+//Initialize page
 function initPage() {
     quiz__lenght();
-
+    showQuestion();
+    showAnswear();
 }
 
+
+// Show questions & answers 
 function quiz__lenght() {
-    document.getElementById('quizz__lenght') = questions.lenght;
+    let length = document.getElementById('quiz__lenght');
+    length.innerHTML = questions.length;
+}
+
+
+function showQuestion() {
+    let question = questions[currentQuestion];
+    let showQuestion = document.getElementById('question_ID');
+    showQuestion.innerHTML = question['question'];
+}
+
+
+function showAnswear() {
+    let question = questions[currentQuestion];
+    for (i = 0; i < 4; i++) {
+        let answer = document.getElementById('answer_' + (i + 1) + '--id');
+        answer.innerHTML = question['answer_' + (i + 1)];
+    }
+}
+
+
+//Select the next question
+function nextQuestion() {
+    currentQuestion++;
+    if (currentQuestion <= questions.length - 1) {
+        percentCalculator();
+        //Increase Current Question Counter 
+        let quizQuestion__counter = document.getElementById('quizQuestion__counter');
+        quizQuestion__counter.innerHTML = currentQuestion + 1;
+        // Reset & Show new question
+        showQuestion();
+        showAnswear();
+    } else {
+        //Show the result at the end of the quiz
+        percentCalculator();
+        showResult();
+        playApplause();
+    }
+    resetButton();
+    closeQuiz();
+}
+
+
+//Feed-back for the answer
+function answer(selector) {
+    let question = questions[currentQuestion];
+    let right_answer = question['right_answer'];
+    let selectorNumber = selector.slice(-1);
+    let idOfRightAnswer = 'answer_' + right_answer;
+    // If the answer is correct
+    if (selectorNumber == right_answer) {
+        audio_success.play();
+        right_answer_counter++;
+        document.getElementById(selector + '--id').parentNode.classList.add('bg-success');
+    } else {
+        //If the answer is wrong
+        audio_fail.play();
+        false_answer_counter++;
+        document.getElementById(selector + '--id').parentNode.classList.add('bg-danger');
+        document.getElementById(idOfRightAnswer + '--id').parentNode.classList.add('bg-success');
+    }
+    document.getElementById('nextQuestionId').disabled = false;
+}
+
+
+//Re-enable the "Next Question" Button
+function resetButton() {
+    document.getElementById('nextQuestionId').disabled = true;
+    for (let i = 1; i < 5; i++) {
+        document.getElementById('answer_' + i + '--id').parentNode.classList.remove('bg-success');
+        document.getElementById('answer_' + i + '--id').parentNode.classList.remove('bg-danger');
+    }
+}
+
+
+//It show the result of the Quiz
+function showResult() {
+    let resultText = document.getElementById('result_id');
+    resultText.innerHTML = templateResult();
+    document.getElementById('quiz_img').src = "/img/cup-1615074_640.png";
+    document.getElementById('quiz_body').style = 'display:none';
+    document.getElementById('result_id').style = '';
+}
+
+
+//Template of the result 
+function templateResult() {
+    return `<div class="result">
+                <h5> Congratulation!</h5> 
+                <p> You have <b>${right_answer_counter}</b> right Answers out of <b>10</b> Questions.</p>
+            </div>
+            <div>
+                <button onclick="restartGame()" class=" btn btn-primary" id="restartGame">Restart Game</button>
+            </div>`;
+}
+
+
+//It changes the text from "Next Question" into "Finish"
+function closeQuiz() {
+    if (currentQuestion == 9) {
+        document.getElementById('nextQuestionId').innerHTML = `Finish`;
+    } else{
+        document.getElementById('nextQuestionId').innerHTML = `Next Question!`;
+    }
+}
+
+
+//Calculate the percents
+function percentCalculator() {
+    let percent = currentQuestion / questions.length;
+    percent = Math.round(percent * 100);
+    document.getElementById('progress-bar').innerHTML = `${percent}%`;
+    document.getElementById('progress-bar').style = `width: ${percent}%`;
+}
+
+
+//Reset the Quizz
+function restartGame() {
+    document.getElementById('quiz_img').src = "/img/education-6305113_640.jpg";
+    document.getElementById('quiz_body').style = '';
+    document.getElementById('result_id').style = 'display:none';
+
+    resetCounters()
+    initPage();
+    percentCalculator();
+}
+
+
+//Reset the Counters
+function resetCounters() {
+    right_answer_counter = 0;
+    currentQuestion = 0;
+    let quizQuestion__counter = document.getElementById('quizQuestion__counter');
+    quizQuestion__counter.innerHTML = currentQuestion + 1;
+}
+
+
+//Play end applause
+function playApplause(){
+    if(currentQuestion == 10){
+        audio_end.play();
+    }
 }

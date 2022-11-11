@@ -18,47 +18,50 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body onload = "initPage()">
+<body onload="initPage()">
     <nav class="navbar bg-light">
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">Quizapp</span>
+            <span onclick="window.location.reload()" class=" nameLogo navbar-brand mb-0 h1">Quizapp</span>
         </div>
     </nav>
     <div class="container">
-        <div class="card quizz-card">
-            <img src="img/education-6305113_640.jpg" class="card-img-top">
-            <div class="card-body">
-                <h5 class="card-title">Frage</h5>
+        <div class="card quiz-card">
+            <!-- Image and Result -->
+            <div>
+                <img src="img/education-6305113_640.jpg" class="card-img-top" id="quiz_img">
+            </div>
+            <div class="result" id="result_id" style="display: none;"></div>
+            <!-- Q&A Area -->
+            <div class="card-body" id="quiz_body" style="">
+                <h5 class="card-title" id="question_ID">Frage</h5>
 
-                <div class="card mb-2">
-                    <div class="card-body">
-                        Antwort
-                    </div>
+                <div class="card quiz-answer-card mb-2" onclick="answer('answer_1')">
+                    <div class="card-body" id="answer_1--id"></div>
                 </div>
 
-                <div class="card mb-2">
-                    <div class="card-body">
-                        Antwort
-                    </div>
+                <div class="card quiz-answer-card mb-2" onclick="answer('answer_2')">
+                    <div class="card-body" id="answer_2--id"></div>
                 </div>
 
-                <div class="card mb-2">
-                    <div class="card-body">
-                        Antwort
-                    </div>
+                <div class="card quiz-answer-card mb-2" onclick="answer('answer_3')">
+                    <div class="card-body" id="answer_3--id"></div>
                 </div>
 
-                <div class="card mb-2">
-                    <div class="card-body">
-                        Antwort
-                    </div>
+                <div class="card  quiz-answer-card mb-2" onclick="answer('answer_4')">
+                    <div class="card-body" id="answer_4--id"></div>
                 </div>
 
                 <div class="question-footer">
-                    <b>1</b> von <b id="quizz__lenght">10</b> Fragen!
-                    <button class=" btn btn-primary">Nächste Frage</button>
+                    <p><b id="quizQuestion__counter">1</b> out of <b id="quiz__lenght">10</b> Questions!</p>
+                    <button onclick="nextQuestion()" class=" btn btn-primary" id="nextQuestionId" disabled>Next
+                        question!</button>
                 </div>
-
+            </div>
+             <!-- Progressbar-->
+             <div id="progressbar_id">
+                <div class="progress">
+                    <div class="progress-bar" id="progress-bar"role="progressbar" style="width:;"></div>
+                  </div>
             </div>
         </div>
     </div>

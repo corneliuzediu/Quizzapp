@@ -1,0 +1,10 @@
+@media(max-width:400px) {
+    .question-footer {
+        flex-direction: column;
+    }
+
+    .result p {
+        margin: 10px;
+        text-align: center;
+    }
+}
