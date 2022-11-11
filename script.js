@@ -1,6 +1,6 @@
 let questions = [
     {
-        "question": "Which country has the öargest poplation in the world?",
+        "question": "Which country has the largest population in the world?",
         "answer_1": "USA",
         "answer_2": "Brazil",
         "answer_3": "China",
@@ -16,7 +16,7 @@ let questions = [
         "right_answer": 2
     },
     {
-        "question": "Which are to color of the German flag?",
+        "question": "Which are the colors of the German flag?",
         "answer_1": "Black, Red, Yellow",
         "answer_2": "Black, Red, Mandarin",
         "answer_3": "Black, Red, Orange",
@@ -24,7 +24,7 @@ let questions = [
         "right_answer": 4
     },
     {
-        "question": "The second smallest country in the world is: ?",
+        "question": "The second smallest country in the world is?",
         "answer_1": "Vatican",
         "answer_2": "San Marino",
         "answer_3": "Monaco",
