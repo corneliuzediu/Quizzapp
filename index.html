@@ -34,34 +34,35 @@
             <!-- Q&A Area -->
             <div class="card-body" id="quiz_body" style="">
                 <h5 class="card-title" id="question_ID">Frage</h5>
+                <div class="card_container">
+                    <div id="cover" class="cover d-none"></div>
+                    <div class="card quiz-answer-card mb-2" onclick="answer('answer_1')" id="click" style="">
+                        <div class="card-body" id="answer_1--id"></div>
+                    </div>
 
-                <div class="card quiz-answer-card mb-2" onclick="answer('answer_1')">
-                    <div class="card-body" id="answer_1--id"></div>
+                    <div class="card quiz-answer-card mb-2" onclick="answer('answer_2')" id="click" style="">
+                        <div class="card-body" id="answer_2--id"></div>
+                    </div>
+
+                    <div class="card quiz-answer-card mb-2" onclick="answer('answer_3')" id="click" disabled>
+                        <div class="card-body" id="answer_3--id"></div>
+                    </div>
+
+                    <div class="card  quiz-answer-card mb-2" onclick="answer('answer_4')" id="click" disabled>
+                        <div class="card-body" id="answer_4--id"></div>
+                    </div>
                 </div>
-
-                <div class="card quiz-answer-card mb-2" onclick="answer('answer_2')">
-                    <div class="card-body" id="answer_2--id"></div>
-                </div>
-
-                <div class="card quiz-answer-card mb-2" onclick="answer('answer_3')">
-                    <div class="card-body" id="answer_3--id"></div>
-                </div>
-
-                <div class="card  quiz-answer-card mb-2" onclick="answer('answer_4')">
-                    <div class="card-body" id="answer_4--id"></div>
-                </div>
-
                 <div class="question-footer">
                     <p><b id="quizQuestion__counter">1</b> out of <b id="quiz__lenght">10</b> Questions!</p>
                     <button onclick="nextQuestion()" class=" btn btn-primary" id="nextQuestionId" disabled>Next
                         question!</button>
                 </div>
             </div>
-             <!-- Progressbar-->
-             <div id="progressbar_id">
+            <!-- Progressbar-->
+            <div id="progressbar_id">
                 <div class="progress">
-                    <div class="progress-bar" id="progress-bar"role="progressbar" style="width:;"></div>
-                  </div>
+                    <div class="progress-bar" id="progress-bar" role="progressbar" style="width:;"></div>
+                </div>
             </div>
         </div>
     </div>

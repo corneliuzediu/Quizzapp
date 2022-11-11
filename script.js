@@ -140,6 +140,7 @@ function nextQuestion() {
         showResult();
         playApplause();
     }
+    clickEnable();
     resetButton();
     closeQuiz();
 }
@@ -151,6 +152,8 @@ function answer(selector) {
     let right_answer = question['right_answer'];
     let selectorNumber = selector.slice(-1);
     let idOfRightAnswer = 'answer_' + right_answer;
+    
+
     // If the answer is correct
     if (selectorNumber == right_answer) {
         audio_success.play();
@@ -163,7 +166,19 @@ function answer(selector) {
         document.getElementById(selector + '--id').parentNode.classList.add('bg-danger');
         document.getElementById(idOfRightAnswer + '--id').parentNode.classList.add('bg-success');
     }
+    clickDisable();
     document.getElementById('nextQuestionId').disabled = false;
+}
+
+
+//Disable Multiple-click
+function clickDisable() {
+    document.getElementById('cover').classList.remove(`d-none`);
+}
+
+
+function clickEnable(){
+    document.getElementById('cover').classList.add(`d-none`);
 }
 
 
@@ -181,7 +196,7 @@ function resetButton() {
 function showResult() {
     let resultText = document.getElementById('result_id');
     resultText.innerHTML = templateResult();
-    document.getElementById('quiz_img').src = "/img/cup-1615074_640.png";
+    document.getElementById('quiz_img').src = "img/cup-1615074_640.png";
     document.getElementById('quiz_body').style = 'display:none';
     document.getElementById('result_id').style = '';
 }
@@ -203,7 +218,7 @@ function templateResult() {
 function closeQuiz() {
     if (currentQuestion == 9) {
         document.getElementById('nextQuestionId').innerHTML = `Finish`;
-    } else{
+    } else {
         document.getElementById('nextQuestionId').innerHTML = `Next Question!`;
     }
 }
@@ -220,7 +235,7 @@ function percentCalculator() {
 
 //Reset the Quizz
 function restartGame() {
-    document.getElementById('quiz_img').src = "/img/education-6305113_640.jpg";
+    document.getElementById('quiz_img').src = "img/education-6305113_640.jpg";
     document.getElementById('quiz_body').style = '';
     document.getElementById('result_id').style = 'display:none';
 
@@ -240,8 +255,8 @@ function resetCounters() {
 
 
 //Play end applause
-function playApplause(){
-    if(currentQuestion == 10){
+function playApplause() {
+    if (currentQuestion == 10) {
         audio_end.play();
     }
 }
